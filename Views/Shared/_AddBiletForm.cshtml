@@ -1,0 +1,62 @@
+﻿@model Zamawianie_biletow.Models.Product
+
+@using (Html.BeginForm("Add", "Warehouse", FormMethod.Post))
+{
+
+    @Html.ValidationSummary()
+    <p>Rodzaj biletu:</p>
+    <span>Normalny - Cena: 30 złotych: </span> @Html.TextBoxFor(x => x.Normal, new { @class = "ticket-input", data_price = 30})
+    <br />
+    <span>Ulgowy - Cena: 15 złotych: </span> @Html.TextBoxFor(x => x.Reduced, new { @class = "ticket-input", data_price = 15})
+    <br />
+
+
+    <span>Login: </span> @User.Identity.Name //finalnie usunąć
+
+
+    <br />
+
+    <p>Dane kupującego:</p>
+    <span>Imię: </span> @Html.TextBoxFor(x => x.UserName)
+    <span>Nazwisko: </span> @Html.TextBoxFor(x => x.UserSurname)
+    <br />
+
+    <br />
+    <p>Suma cen biletów: <span id="totalPrice">0</span> zł</p>
+    <button type="submit">Kup bilety</button>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script>
+        // Funkcja do obliczania sumy cen
+        function calculateTotalPrice() {
+            var totalPrice = 0;
+
+            // Pobierz wartość z pola Normal
+            var normalQuantity = parseFloat($("#Normal").val()) || 0;
+            var normalPrice = parseFloat($("#Normal").data("price")) || 0;
+            totalPrice += normalQuantity * normalPrice;
+
+            // Pobierz wartość z pola Reduced
+            var reducedQuantity = parseFloat($("#Reduced").val()) || 0;
+            var reducedPrice = parseFloat($("#Reduced").data("price")) || 0;
+            totalPrice += reducedQuantity * reducedPrice;
+
+            return totalPrice.toFixed(2);
+        }
+
+        // Aktualizuj sumę przy zmianie wartości w polach biletów
+        $(".ticket-input").change(function () {
+            var updatedTotalPrice = calculateTotalPrice();
+            $("#totalPrice").text(updatedTotalPrice);
+        });
+
+        // Przykład odczytu wartości z pola Imię po zmianie
+        $("#userName").change(function () {
+            var userNameValue = $(this).val();
+            console.log("Nowa wartość pola Imię: " + userNameValue);
+        });
+    </script>
+} 

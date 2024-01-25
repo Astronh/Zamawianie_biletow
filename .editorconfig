@@ -1,0 +1,7 @@
+﻿[*.cs]
+
+# CS8618: Pole niedopuszczające wartości null musi zawierać wartość inną niż null podczas kończenia działania konstruktora. Rozważ zadeklarowanie pola jako dopuszczającego wartość null.
+dotnet_diagnostic.CS8618.severity = none
+
+# CS0649: Do pola „Product.LoginName1” nigdy nie jest przypisywana wartość i będzie ono mieć zawsze wartość domyślną null
+dotnet_diagnostic.CS0649.severity = none

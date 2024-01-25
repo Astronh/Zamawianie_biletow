@@ -1,0 +1,14 @@
+﻿@model IEnumerable<Zamawianie_biletow.Models.Product>
+    <h1>Lista produktów:</h1>
+
+
+<ol>
+    @foreach (var product in Model)
+    {
+        <li>
+            <b>Zamówienie:</b>
+            @product.Id
+            <a href="@Url.Action("Details","Warehouse", new { Id = product.Id })">Szczegóły</a>
+        </li>
+    }
+</ol>
